@@ -6,13 +6,13 @@
 	<session-factory>
 		<!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/parktable</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/lbs_server</property>
         <property name="connection.username">zjx</property>
         <property name="connection.password">130013</property>
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">3</property>
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
         <!-- Disable the second-level cache  -->

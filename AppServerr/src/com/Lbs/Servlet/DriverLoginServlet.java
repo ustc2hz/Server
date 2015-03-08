@@ -23,7 +23,7 @@ public class DriverLoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 		Driver driver = new Driver();
-		driver.setDriverName(request.getParameter("username"));
+		driver.setDriverName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		driver.setDriverPassword(request.getParameter("password"));
 
 		System.out.println(request.getParameter("username"));

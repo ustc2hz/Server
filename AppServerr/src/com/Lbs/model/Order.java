@@ -1,42 +1,46 @@
 package com.Lbs.model;
 
-public class Order {
-	private Integer orderId;
-	private Integer driverId;
-	private Integer adminId;
-	private String parkName;
-	private String parkAddress;
-	private Integer driverNum;
-	private String orderDate;
-	private String driverPhone;
-	private String orderInfo;
-	private String orderPrice;
-	private Integer orderStatus;
-	private Admin admin;
-	private Driver driver;
+import java.util.UUID;
 
-	public Integer getOrderId() {
+public class Order {
+	private int orderId; // 订单Id
+	private String uuid; // 唯一标识
+	private String parkName; // 停车场名
+	private String parkAddress; // 停车场地址
+	private int driverNum; // 驾驶员数量
+	private String orderDate; // 订单日期
+	private String orderInfo; // 订单信息
+	private String orderPrice; // 订单价格
+	private int orderStatus; // 订单状态
+	private Admin admin; // 管理员
+	private Driver driver; // 驾驶员
+
+	public Order() {
+		uuid = UUID.randomUUID().toString();
+	}
+	
+	public int getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 
-	public Integer getDriverId() {
-		return driverId;
+	public int getDriverNum() {
+		return driverNum;
 	}
 
-	public void setDriverId(Integer driverId) {
-		this.driverId = driverId;
+	public void setDriverNum(int driverNum) {
+		this.driverNum = driverNum;
 	}
 
-	public Integer getAdminId() {
-		return adminId;
+	public int getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setAdminId(Integer adminId) {
-		this.adminId = adminId;
+	public void setOrderStatus(int orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public String getParkName() {
@@ -55,28 +59,12 @@ public class Order {
 		this.parkAddress = parkAddress;
 	}
 
-	public Integer getDriverNum() {
-		return driverNum;
-	}
-
-	public void setDriverNum(Integer driverNum) {
-		this.driverNum = driverNum;
-	}
-
 	public String getOrderDate() {
 		return orderDate;
 	}
 
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
-	}
-
-	public String getDriverPhone() {
-		return driverPhone;
-	}
-
-	public void setDriverPhone(String driverPhone) {
-		this.driverPhone = driverPhone;
 	}
 
 	public String getOrderInfo() {
@@ -95,14 +83,6 @@ public class Order {
 		this.orderPrice = orderPrice;
 	}
 
-	public Integer getOrderStatus() {
-		return orderStatus;
-	}
-
-	public void setOrderStatus(Integer orderStatus) {
-		this.orderStatus = orderStatus;
-	}
-
 	public Admin getAdmin() {
 		return admin;
 	}
@@ -118,4 +98,13 @@ public class Order {
 	public void setDriver(Driver driver) {
 		this.driver = driver;
 	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
 }

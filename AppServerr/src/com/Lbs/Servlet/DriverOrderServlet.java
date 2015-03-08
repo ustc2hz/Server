@@ -54,7 +54,7 @@ public class DriverOrderServlet extends HttpServlet {
 			}
 			break;
 		case 2:// 删除单个订单
-			result = orderOperate.deleteOrder(order);
+			//result = orderOperate.deleteOrder(order);
 			if (result) {
 				out.print("success");
 			} else {
@@ -63,7 +63,7 @@ public class DriverOrderServlet extends HttpServlet {
 			break;
 		case 3:// 删除所有订单
 			String drivername = request.getParameter("DriverName");// 获取驾驶员的name
-			result = orderOperate.DriverdeleteOrders(drivername);
+			//result = orderOperate.DriverdeleteOrders(drivername);
 			if (result) {
 				out.print("success");
 			} else {
@@ -71,7 +71,7 @@ public class DriverOrderServlet extends HttpServlet {
 			}
 			break;
 		case 4: // 修改订单
-			result = orderOperate.updateOrder(order);
+			//result = orderOperate.updateOrder(order);
 			if (result) {
 				out.print("success");
 			} else {
@@ -81,7 +81,7 @@ public class DriverOrderServlet extends HttpServlet {
 		case 5:// 查询所有订单
 			List<Order> list = new ArrayList<Order>();
 			String dname = request.getParameter("dName");// 获取驾驶员的name
-			list = orderOperate.DriverfindOrder(dname);
+			//list = orderOperate.DriverfindOrder(dname);
 			out.println(list.toString());
 			break;
 		default:

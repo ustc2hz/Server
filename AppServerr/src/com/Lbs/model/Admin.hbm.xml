@@ -3,12 +3,12 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.Lbs.model.Admin" table="admin" >
-		<id name="adminId" column="admin_id" type="integer">
-			<generator class="increment"></generator>	
+	<class name="com.Lbs.model.Admin" table="lbs_admin" >
+		<id name="adminId" column="admin_id" type="int">
+			<generator class="native"></generator>	
 		</id>
-		<property name="adminName" column="admin_name" type="string" not-null="true" unique="true"></property>
-		<property name="adminPassword" column="admin_password" type="string" not-null="true"></property>
-		<property name="parkPhone" column="park_phone" type="string" not-null="false"></property>
+		<property name="adminName" column="admin_name" type="string" ></property>
+		<property name="adminPassword" column="admin_password" type="string" ></property>
+		<property name="parkPhone" column="admin_phone" type="string" ></property>
 	</class>
 </hibernate-mapping>

@@ -24,7 +24,7 @@ public class DriverRegisterServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		Driver driver = new Driver();
-		driver.setDriverName(request.getParameter("username"));
+		driver.setDriverName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		driver.setDriverPassword(request.getParameter("password"));
 		boolean flag = false;
 		// 注册时,根据Driver的name进行查找即可

@@ -47,7 +47,7 @@ public class AdminOrderServlet extends HttpServlet {
 		// 编号为1 删除单个订单 编号为2删除所有订单 编号3:修改订单 编号为4: 查找需要处理的订单 编号为5: 查询所有订单
 		switch (id) {
 		case 1: // 删除单个订单
-			result = orderOperate.deleteOrder(order);
+			//result = orderOperate.deleteOrder(order);
 			if (result) {
 				out.print("success");
 			} else {
@@ -65,7 +65,7 @@ public class AdminOrderServlet extends HttpServlet {
 			}
 			break;
 		case 3: // 修改订单
-			result = orderOperate.updateOrder(order);
+			// result = orderOperate.updateOrder(order);
 			if (result) {
 				out.print("success");
 			} else {
@@ -76,14 +76,14 @@ public class AdminOrderServlet extends HttpServlet {
 			List<Order> list = new ArrayList<Order>();
 			String pname = request.getParameter("parkname");// 获取管理员的停车场Name
 			String paddress = request.getParameter("parkaddress");// 获取管理员停车场的Address
-			list = orderOperate.AdminfindOrder(pname, paddress);
+			 //list = orderOperate.AdminfindOrder(pname, paddress);
 			out.print(list.toString());
 			break;
 		case 5: // 查询所有的订单
 			List<Order> l = new ArrayList<Order>();
 			String parkname = request.getParameter("parkname");// 获取管理员的停车场Name
 			String parkaddress = request.getParameter("parkaddress");// 获取管理员停车场的Address
-			list = orderOperate.AdminfindOrders(parkname, parkaddress);
+			//list = orderOperate.AdminfindOrders(parkname, parkaddress);
 			out.print(l.toString());
 			break;
 		default:

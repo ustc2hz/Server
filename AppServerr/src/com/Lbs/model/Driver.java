@@ -1,16 +1,16 @@
 package com.Lbs.model;
 
 public class Driver {
-	private Integer driverId;
-	private String driverName;
-	private String driverPassword;
-	private String driverPhone;
+	private int driverId; // 驾驶员id
+	private String driverName; // 驾驶员名字
+	private String driverPassword; // 驾驶员密码	
+	private String driverPhone; // 驾驶员电话
 
-	public Integer getDriverId() {
+	public int getDriverId() {
 		return driverId;
 	}
 
-	public void setDriverId(Integer driverId) {
+	public void setDriverId(int driverId) {
 		this.driverId = driverId;
 	}
 

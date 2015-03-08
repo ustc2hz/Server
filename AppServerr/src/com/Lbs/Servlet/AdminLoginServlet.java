@@ -26,10 +26,10 @@ public class AdminLoginServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 
 		Admin user = new Admin();
-		user.setAdminName(request.getParameter("username"));
+		user.setAdminName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		user.setAdminPassword(request.getParameter("password"));
-		System.out.println("管理员名字：" + request.getParameter("username"));
-		System.out.println("管理员密码：" + request.getParameter("password"));
+		System.out.println("管理员名字：" + user.getAdminName());
+		System.out.println("管理员密码：" + user.getAdminPassword());
 		Admin existUser = (new AdminOperate()).findAdmin(user);
 
 		PrintWriter out = response.getWriter();

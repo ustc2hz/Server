@@ -24,7 +24,7 @@ public class AdminRegisterServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		Admin user = new Admin();
-		user.setAdminName(request.getParameter("username"));
+		user.setAdminName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		user.setAdminPassword(request.getParameter("password"));
 		System.out.println(user.getAdminName());
 		System.out.println(user.getAdminPassword());

@@ -1,16 +1,16 @@
 package com.Lbs.model;
 
 public class Admin {
-	private Integer adminId;
-	private String adminName;
-	private String adminPassword;
-	private String parkPhone;
+	private int adminId; // 管理员id
+	private String adminName; // 管理员名字
+	private String adminPassword; // 管理员密码
+	private String parkPhone; // 停车场电话
 
-	public Integer getAdminId() {
+	public int getAdminId() {
 		return adminId;
 	}
 
-	public void setAdminId(Integer adminId) {
+	public void setAdminId(int adminId) {
 		this.adminId = adminId;
 	}
 
