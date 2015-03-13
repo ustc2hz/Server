@@ -136,7 +136,4 @@ public class AdminOperate {
 		}
 		return flag;
 	}
-	/*
-	 * 查找管理员的ID，根据管理员的name来查找ID
-	 */
 }

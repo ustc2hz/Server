@@ -35,6 +35,7 @@ public class ChangeOrderStatus extends HttpServlet {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String result = "success";
 		
+		// 取出Jackson封装的信息
 		String ids = request.getParameter("changeIds");
 		List<String> idList = objectMapper.readValue(ids, List.class);
 		System.out.println(idList.toString());

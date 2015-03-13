@@ -66,6 +66,10 @@
     <servlet-class>com.Lbs.Servlet.ChangeOrderStatus</servlet-class>
   </servlet>
 
+	<servlet>
+		<servlet-name>ServerUpdateYuntu</servlet-name>
+   		<servlet-class>com.Lbs.Servlet.ServerUpdateYuntu</servlet-class>
+	</servlet>
 
 
 
@@ -132,6 +136,11 @@
     <servlet-name>ChangeOrderStatus</servlet-name>
     <url-pattern>/ChangeOrderStatus</url-pattern>
   </servlet-mapping>	
+  <servlet-mapping>
+    <servlet-name>ServerUpdateYuntu</servlet-name>
+    <url-pattern>/ServerUpdateYuntu</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

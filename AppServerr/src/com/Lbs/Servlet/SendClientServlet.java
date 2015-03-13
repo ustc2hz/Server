@@ -36,13 +36,14 @@ public class SendClientServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// 获取管理员id
 		String adminId = request.getParameter("adminId");
-		ObjectMapper objectMapper = new ObjectMapper();
+		
 		String jacksonString = "old";
 		System.out.println("访问");
 		
 		OrderOperate op = new OrderOperate();
 		OrderShowList os = op.getAdminOrderShow(Integer.parseInt(adminId));
 		if(os.getAdminShow().size() != 0) {
+			ObjectMapper objectMapper = new ObjectMapper();
 			// 将OrderShowList对象生成Jackson字符串
 			jacksonString = objectMapper.writeValueAsString(os);
 		} else {

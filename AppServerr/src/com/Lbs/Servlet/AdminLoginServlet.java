@@ -8,9 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.Lbs.model.Admin;
 import com.Lbs.orm.AdminOperate;
-
+/**
+ * 管理员登录的Servlet
+ */
 public class AdminLoginServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,7 +28,7 @@ public class AdminLoginServlet extends HttpServlet {
 		// response.setContentType("text/html");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
+		
 		Admin user = new Admin();
 		user.setAdminName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		user.setAdminPassword(request.getParameter("password"));
@@ -33,19 +37,14 @@ public class AdminLoginServlet extends HttpServlet {
 		Admin existUser = (new AdminOperate()).findAdmin(user);
 
 		PrintWriter out = response.getWriter();
-		String msg = "";
-		if (existUser == null) {
-			// 没有查到 --- 登陆失败
-			msg = "fail";
-			out.write(msg);
-			System.out.println("登陆失败");
-		} else {
+		String msg = "fail";
+		if (existUser != null) {
 			// 查找 --- 登陆成功
-			msg = "success";
-			out.write(msg);
-			// out.print(msg);
-			System.out.println("登陆成功");
-		}
+			ObjectMapper objectMapper = new ObjectMapper();
+			msg = objectMapper.writeValueAsString(existUser);
+		} 
+		
+		out.print(msg);
 		out.flush();
 		out.close();
 	}

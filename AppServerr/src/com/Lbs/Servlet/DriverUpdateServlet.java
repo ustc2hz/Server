@@ -2,6 +2,7 @@ package com.Lbs.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,13 +13,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.Lbs.model.Driver;
 import com.Lbs.orm.DriverOperate;
-
+/**
+ * 修改驾驶员信息的Servlet
+ */
 public class DriverUpdateServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
-
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -26,25 +28,23 @@ public class DriverUpdateServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		boolean flag = false;
-		String result = "";
-		String message = new String(request.getParameter("driver").getBytes(
-				"iso-8859-1"), "utf-8");
-		System.out.println(message);
-		// 获取信息
-		ObjectMapper objectMapper = new ObjectMapper();
-		Driver driver = objectMapper.readValue(message, Driver.class);// 获取driver类
-		DriverOperate driverOperate = new DriverOperate();
-
 		PrintWriter out = response.getWriter();
-		flag = driverOperate.updateDriver(driver);
+		
+		DriverOperate dOperate = new DriverOperate();
+		String result = "fail";
+		
+		// 获取信息
+		String messages = new String(request.getParameter("messages").getBytes(
+				"iso-8859-1"), "utf-8");
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<String> msgList = objectMapper.readValue(messages, List.class);
+		System.out.println(msgList.toString());
+		boolean flag = dOperate.updateDriverInfo(msgList);
 		if (flag) {// 修改成功
 			result = "success";
-			out.print(result); // 返回给APP
-		} else {
-			result = "fail";
-			out.print(result); // 返回给APP
-		}
+		} 
+		
+		out.print(result); // 返回给APP
 		out.flush();
 		out.close();
 	}
