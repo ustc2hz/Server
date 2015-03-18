@@ -31,7 +31,6 @@ public class DriverLoginServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
-		
 		Driver driver = new Driver();
 		driver.setDriverName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		driver.setDriverPassword(request.getParameter("password"));
@@ -49,7 +48,6 @@ public class DriverLoginServlet extends HttpServlet {
 			list.add(existDriver.getDriverPhone());
 			System.out.println(list.toString());
 			msg = objectMapper.writeValueAsString(list);
-			//msg = "success";
 		}
 		
 		out.print(msg);

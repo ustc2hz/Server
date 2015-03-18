@@ -23,26 +23,22 @@ public class DriverRegisterServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
 		Driver driver = new Driver();
 		driver.setDriverName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		driver.setDriverPassword(request.getParameter("password"));
-		boolean flag = false;
 		
 		// 注册时,根据Driver的name进行查找即可
 		DriverOperate driverOperate = new DriverOperate();
-		String msg = "";
+		String msg = "fail";
 
 		// 用户不存在
-		flag = driverOperate.insertDriver(driver);
+		boolean flag = driverOperate.insertDriver(driver);
 		if (flag) {// 增加成功
 			msg = "success";
-		} else {
-			msg = "fail";
-		}
+		} 
 		
 		out.print(msg);
 		out.flush();

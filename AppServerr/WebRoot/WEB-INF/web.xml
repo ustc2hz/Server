@@ -70,6 +70,11 @@
 		<servlet-name>ServerUpdateYuntu</servlet-name>
    		<servlet-class>com.Lbs.Servlet.ServerUpdateYuntu</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>OrderStatusToTwoServlet</servlet-name>
+    <servlet-class>com.Lbs.Servlet.OrderStatusToTwoServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -139,6 +144,10 @@
   <servlet-mapping>
     <servlet-name>ServerUpdateYuntu</servlet-name>
     <url-pattern>/ServerUpdateYuntu</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderStatusToTwoServlet</servlet-name>
+    <url-pattern>/OrderStatusToTwoServlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

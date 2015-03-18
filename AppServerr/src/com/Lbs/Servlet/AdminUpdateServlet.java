@@ -13,12 +13,18 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.Lbs.model.Admin;
 import com.Lbs.orm.AdminOperate;
 
+/**
+ * 修改停车场管理员密码的Servlet
+ */
 public class AdminUpdateServlet extends HttpServlet {
+
+	private static final int UPDATE_SUCCESS = 1; // 修改密码成功
+	private static final int UPDATE_OLD_ERROE = 2; // 旧密码不匹配
+	private static final int UPDATE_ERROR = 3; // 修改密码出错
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
-
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -26,25 +32,33 @@ public class AdminUpdateServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		boolean flag = false;
-		String result = "";
-		String message = new String(request.getParameter("admin").getBytes(
-				"iso-8859-1"), "utf-8");
-		System.out.println(message);
-		// 获取信息
-		ObjectMapper objectMapper = new ObjectMapper();
-		Admin admin = objectMapper.readValue(message, Admin.class);// 获取admin类
-		AdminOperate adminOperate = new AdminOperate();
-
 		PrintWriter out = response.getWriter();
-		flag = adminOperate.updateAdmin(admin);
-		if (flag) {// 修改成功
+
+		String result = "fail"; // 默认失败
+
+		// 获取参数
+		int adminId = Integer.parseInt(request.getParameter("adminId"));
+		String oldPwd = request.getParameter("oldPwd");
+		String newPwd = request.getParameter("newPwd");
+		System.out.println(adminId);
+		System.out.println(oldPwd);
+		System.out.println(newPwd);
+
+		// 操作数据库
+		AdminOperate adminOperate = new AdminOperate();
+		switch (adminOperate.updateAdminPwd(adminId, oldPwd, newPwd)) {
+		case UPDATE_SUCCESS: // 修改成功
 			result = "success";
-			out.print(result); // 返回给APP
-		} else {
+			break;
+		case UPDATE_OLD_ERROE: // 旧密码错误
+			result = "oldError";
+			break;
+		case UPDATE_ERROR: // 修改失败
 			result = "fail";
-			out.print(result); // 返回给APP
+			break;
 		}
+
+		out.print(result);
 		out.flush();
 		out.close();
 	}

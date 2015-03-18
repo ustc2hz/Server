@@ -8,43 +8,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
-import com.Lbs.model.Driver;
-import com.Lbs.orm.DriverOperate;
-
-public class DriverDeleteServlet extends HttpServlet {
+import com.Lbs.orm.AdminOperate;
+/**
+ * 修改订单状态为2:已完成
+ */
+public class OrderStatusToTwoServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
-
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		boolean flag = false;
-		String result = "";
-		String message = new String(request.getParameter("driver").getBytes(
-				"iso-8859-1"), "utf-8");
-		System.out.println(message);
-		// 获取信息
-		ObjectMapper objectMapper = new ObjectMapper();
-		Driver driver = objectMapper.readValue(message, Driver.class);// 获取admin类
-		DriverOperate driverOperate = new DriverOperate();
-
 		PrintWriter out = response.getWriter();
-		flag = driverOperate.deleteDriver(driver);
-		if (flag) {// 删除成功
+		String result = "fail";
+		
+		// 获取订单id
+		int orderId = Integer.parseInt(request.getParameter("orderId"));
+		
+		AdminOperate aOperate = new AdminOperate(); 
+		if(aOperate.updateStatusTwo(orderId)) {
 			result = "success";
-			out.print(result); // 返回给APP
-		} else {
-			result = "fail";
-			out.print(result); // 返回给APP
 		}
+		
+		out.print(result);
 		out.flush();
 		out.close();
 	}
