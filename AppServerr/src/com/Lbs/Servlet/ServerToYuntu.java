@@ -1,7 +1,5 @@
 package com.Lbs.Servlet;
 
-import com.Lbs.test.DataToYuntu;
-import com.Lbs.test.ObjData;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,8 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.Lbs.model.ParkDetailObject;
+import com.Lbs.model.ParkingBook;
+import com.Lbs.orm.AdminOperate;
+import com.Lbs.test.DataToYuntu;
+
 public class ServerToYuntu extends HttpServlet {
 
+	int managerId = 0;
 	
 	/**
 	 * Constructor of the object.
@@ -28,7 +32,6 @@ public class ServerToYuntu extends HttpServlet {
 	 */
 	public void destroy() {
 		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
 	}
 
 	/**
@@ -43,7 +46,6 @@ public class ServerToYuntu extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		doPost(request,response);
 		
 	}
@@ -65,16 +67,33 @@ public class ServerToYuntu extends HttpServlet {
 		try {
 			dty=new DataToYuntu();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String data=new String();
+		String name=new String();
+		String newdata=new String();
 		
-		String data = new String(request.getParameter("data").getBytes("iso-8859-1"),"utf-8");		
-		if(data!=null)
+		
+		if(request.getParameter("data")!=null&&request.getParameter("name")!=null)
+		{
+		 data = new String(request.getParameter("data").getBytes("iso-8859-1"),"utf-8");
+		 name = new String(request.getParameter("name").getBytes("iso-8859-1"),"utf-8");
+		
+		 newdata=AppnewData(data,name);
+		}
+		else if(request.getAttribute("data")!=null&&request.getAttribute("name")!=null)
+		{
+			data=new String(request.getAttribute("data").toString());
+			name=new String(request.getAttribute("name").toString());
+			newdata=WebnewData(data,name);
+			
+		}
+		
+		if(newdata!=null)
 		{		
-			System.out.println(data);
+			System.out.println(newdata);
 			try {
-				int a = dty.create(data);
+				int a = dty.create(newdata);
 				if(a==1)
 				{
 					System.out.println("a is :"+a);
@@ -91,7 +110,6 @@ public class ServerToYuntu extends HttpServlet {
 					out.close();
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -99,13 +117,56 @@ public class ServerToYuntu extends HttpServlet {
 		
 	}
 
+	public String AppnewData(String data,String name)
+	{
+		ObjectMapper objectMapper = new ObjectMapper();
+		AdminOperate adminOperate = new AdminOperate();
+		ParkDetailObject parkData = null;
+		try {
+			parkData = objectMapper.readValue(data, ParkDetailObject.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		managerId = adminOperate.findAdminIdByName(name, parkData.getPhone()); // 找到管理员id
+		ParkingBook pb = new ParkingBook();
+		pb.setManagerId(managerId);
+		pb.setParkNum(Integer.parseInt(parkData.getParkSum()));
+		adminOperate.saveParkNumber(pb); // 将车位数量存入数据库
+		
+		 StringBuilder sb = new StringBuilder();
+		 String tempData=data.substring(0, data.length()-1);
+		 sb.append(tempData);
+		 sb.append(",\"managerId\":\"");
+		 sb.append(String.valueOf(managerId));
+		 sb.append("\",\"parkType\":\"app\"}");
+		return sb.toString();
+	}
+	public String WebnewData(String data,String name)
+	{
+		ObjectMapper objectMapper = new ObjectMapper();
+		ParkDetailObject parkData = null;
+		try {
+			parkData = objectMapper.readValue(data, ParkDetailObject.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		managerId = new AdminOperate().findAdminIdByName(name,parkData.getPhone()); // 找到管理员id
+		 StringBuilder sb = new StringBuilder();
+		 String tempData=data.substring(0, data.length()-1);
+		 sb.append(tempData);
+		 sb.append(",\"managerId\":\"");
+		 sb.append(String.valueOf(managerId));
+		 sb.append("\",\"parkType\":\"web\"}");
+		return sb.toString();
+	}
+	
+	
 	/**
 	 * Initialization of the servlet. <br>
 	 *
 	 * @throws ServletException if an error occurs
 	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 
 }

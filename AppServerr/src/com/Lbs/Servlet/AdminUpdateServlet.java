@@ -40,9 +40,6 @@ public class AdminUpdateServlet extends HttpServlet {
 		int adminId = Integer.parseInt(request.getParameter("adminId"));
 		String oldPwd = request.getParameter("oldPwd");
 		String newPwd = request.getParameter("newPwd");
-		System.out.println(adminId);
-		System.out.println(oldPwd);
-		System.out.println(newPwd);
 
 		// 操作数据库
 		AdminOperate adminOperate = new AdminOperate();

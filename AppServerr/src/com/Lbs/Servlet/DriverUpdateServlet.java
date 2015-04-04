@@ -38,11 +38,12 @@ public class DriverUpdateServlet extends HttpServlet {
 				"iso-8859-1"), "utf-8");
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<String> msgList = objectMapper.readValue(messages, List.class);
-		System.out.println(msgList.toString());
 		boolean flag = dOperate.updateDriverInfo(msgList);
 		if (flag) {// 修改成功
 			result = "success";
-		} 
+		} else if("2".equals(msgList.get(0))){
+			result = "oldError";
+		}
 		
 		out.print(result); // 返回给APP
 		out.flush();

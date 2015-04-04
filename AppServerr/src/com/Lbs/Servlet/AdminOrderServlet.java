@@ -40,7 +40,6 @@ public class AdminOrderServlet extends HttpServlet {
 		// 获取订单操作
 		int type = Integer.valueOf(request.getParameter("type"));
 		int adminId = Integer.valueOf(request.getParameter("adminId"));
-		System.out.println(adminId);
 		
 		AdminOperate adminOperate = new AdminOperate();
 		OrderShowList osl = null;

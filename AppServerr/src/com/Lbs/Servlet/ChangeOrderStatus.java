@@ -38,7 +38,6 @@ public class ChangeOrderStatus extends HttpServlet {
 		// 取出Jackson封装的信息
 		String ids = request.getParameter("changeIds");
 		List<String> idList = objectMapper.readValue(ids, List.class);
-		System.out.println(idList.toString());
 		
 		boolean flag = op.updateOrderStatusToOne(idList);
 		if(!flag) result = "fail"; 

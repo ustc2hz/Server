@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.Lbs.model.Admin;
 import com.Lbs.model.AdminOrderShow;
-import com.Lbs.model.DriverOrderShow;
 import com.Lbs.model.Order;
 import com.Lbs.model.OrderShowList;
+import com.Lbs.model.ParkingBook;
 import com.Lbs.util.HibernateUtil;
 /**
  * 停车场管理的数据库操作类
@@ -71,6 +70,36 @@ public class AdminOperate {
 		return manager;
 	}
 
+	/**
+	 * 找出管理员的id
+	 * @param adminName 管理员名
+	 * @return int 
+	 */
+	public int findAdminIdByName(String adminName , String parkPhone) {
+		int managerId = 0;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from Admin admin where admin.adminName = ?";
+			Iterator admins = session.createQuery(hql)
+					.setString(0, adminName)
+					.iterate();
+			if (admins.hasNext()) {
+				Admin manager = (Admin) admins.next();
+				manager.setParkPhone(parkPhone); // 存入电话
+				managerId = manager.getAdminId();
+			}
+			session.flush();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			managerId = 0;
+		} finally {
+			session.close();
+		}
+		return managerId;
+	}
+	
 	/**
 	 * 修改停车场管理员的密码
 	 * @param adminId 管理员id
@@ -172,6 +201,50 @@ public class AdminOperate {
 		}
 		
 		return flag;
+	}
+	
+	/**
+	 * 将注册的停车场和对于的管理员id存在数据库中
+	 * @param pb 存储的对象
+	 */
+	public void saveParkNumber(ParkingBook pb) {
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			session.save(pb);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+	 
+	/**
+	 * 获取剩余车位数
+	 * @param managerId 停车场管理员id
+	 * @return int
+	 */
+	public int getCurrentNumber(int managerId) {
+		int num = 0;
+		
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			String hql = "from ParkingBook where managerId=?";
+			List list = session.createQuery(hql).setParameter(0, managerId).list();
+			if(list.size() != 0) {
+				ParkingBook bp = (ParkingBook)list.get(0);
+				num = bp.getParkNum();
+			}
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return num;
 	}
 	
 }

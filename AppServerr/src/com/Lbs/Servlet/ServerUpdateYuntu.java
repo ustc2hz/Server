@@ -21,14 +21,12 @@ public class ServerUpdateYuntu extends HttpServlet {
      */
     public ServerUpdateYuntu() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request,response);
 	}
 
@@ -36,12 +34,10 @@ public class ServerUpdateYuntu extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		DataToYuntu dty = null;
 		try {
 			dty=new DataToYuntu();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -53,21 +49,18 @@ public class ServerUpdateYuntu extends HttpServlet {
 				int a = dty.update(data);
 				if(a==1)
 				{
-					System.out.println("a is :"+a);
 					PrintWriter out = response.getWriter();
 					out.write("1");
 					out.flush();
 					out.close();
 				}else
 				{
-					System.out.println("a is :"+a);
 					PrintWriter out = response.getWriter();
 					out.write("0");
 					out.flush();
 					out.close();
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

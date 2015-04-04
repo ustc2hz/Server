@@ -29,9 +29,6 @@ public class AdminRegisterServlet extends HttpServlet {
 		user.setAdminName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		user.setAdminPassword(request.getParameter("password"));
 		
-		System.out.println(user.getAdminName());
-		System.out.println(user.getAdminPassword());
-		
 		// 注册时,根据Admin的name进行查找即可
 		AdminOperate adminOperate = new AdminOperate();
 

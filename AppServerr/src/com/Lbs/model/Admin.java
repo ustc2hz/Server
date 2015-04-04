@@ -1,7 +1,9 @@
 package com.Lbs.model;
-
+/**
+ * 停车场管理员Model
+ */
 public class Admin {
-	private int adminId; // 管理员id
+	private int adminId; // 管理员id 
 	private String adminName; // 管理员名字
 	private String adminPassword; // 管理员密码
 	private String parkPhone; // 停车场电话

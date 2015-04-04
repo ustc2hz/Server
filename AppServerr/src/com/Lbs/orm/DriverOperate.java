@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.Lbs.model.AdminOrderShow;
@@ -55,9 +56,7 @@ public class DriverOperate {
 					.setParameter(0, driver.getDriverName())
 					.setParameter(1, driver.getDriverPassword()).iterate();
 			if (drivers.hasNext()) {
-				System.out.println("进入此处");
 				d = (Driver) drivers.next();
-				System.out.println(d.getDriverName());
 			} 
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -108,7 +107,6 @@ public class DriverOperate {
 			session.getTransaction().commit();
 			flag = true;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			flag = false;
 		} finally {
@@ -129,23 +127,26 @@ public class DriverOperate {
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			Iterator orders = session.createQuery("from Order where driver.driverId=? and orderStatus>?")
-					.setParameter(0, driverId).setParameter(1, 0).iterate();
+			List orders = session.createQuery("from Order where driver.driverId=? and orderStatus>?")
+					.setParameter(0, driverId).setParameter(1, 0).list();
 			session.getTransaction().commit();
-			// 取出有用值
-			for(; orders.hasNext();) {
-				Order order = (Order)orders.next();
-				DriverOrderShow dos = new DriverOrderShow();
-				dos.setParkName(order.getParkName());
-				dos.setParkAddress(order.getParkAddress());
-				dos.setParkNumber(order.getDriverNum());
-				dos.setOrderDate(order.getOrderDate());
-				dos.setOrderDetail(order.getOrderInfo());
-				dos.setOrderPrice(order.getOrderPrice());
-				dos.setAdminPhone(order.getAdmin().getParkPhone());
-				dos.setOrderStatus(order.getOrderStatus());
-				list.add(dos);
+			if(orders.size() != 0 && orders != null) {
+				// 取出有用值
+				for(int i=0; i<orders.size(); i++) {
+					Order order = (Order)orders.get(i);
+					DriverOrderShow dos = new DriverOrderShow();
+					dos.setParkName(order.getParkName());
+					dos.setParkAddress(order.getParkAddress());
+					dos.setParkNumber(order.getDriverNum());
+					dos.setOrderDate(order.getOrderDate());
+					dos.setOrderDetail(order.getOrderInfo());
+					dos.setOrderPrice(order.getOrderPrice());
+					dos.setAdminPhone(order.getAdmin().getParkPhone());
+					dos.setOrderStatus(order.getOrderStatus());
+					list.add(dos);
+				}
 			}
+			
 			orderLists.setDriverShow(list);
 			
 		} catch (Exception e) {
@@ -174,16 +175,20 @@ public class DriverOperate {
 			Driver driver = (Driver)session.get(Driver.class, dId);
 			
 			switch(mode) {
-			case 3: // 修改全部
+			case 3: // 更换车牌号
 				driver.setDriverName(msg.get(2));
-				driver.setDriverPhone(msg.get(3));
-				driver.setDriverPassword(msg.get(4));
 				break;
 			case 1:// 修改电话
 				driver.setDriverPhone(msg.get(2));
 				break;
 			case 2: // 修改密码
-				driver.setDriverPassword(msg.get(2));
+				String oldPwd = msg.get(2); // 取出旧密码
+				if(oldPwd.equals(driver.getDriverPassword())) {
+					driver.setDriverPassword(msg.get(3));	
+				} else {
+					return false;
+				}
+				
 				break;
 			}
 			

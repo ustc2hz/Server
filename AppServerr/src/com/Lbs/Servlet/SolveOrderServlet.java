@@ -34,7 +34,6 @@ public class SolveOrderServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String result = "error"; // 默认为“error”
 		String message = new String(request.getParameter("order").getBytes("iso-8859-1"),"utf-8");
-		System.out.println(message);
 		// 使用Jackson解析Order
 		ObjectMapper objectMapper = new ObjectMapper();
 		Order order = objectMapper.readValue(message,Order.class);

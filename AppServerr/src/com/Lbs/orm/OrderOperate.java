@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -75,6 +76,7 @@ public class OrderOperate {
 		} catch (Exception e) {
 			e.printStackTrace();
 			orderLists = null;
+		} finally {
 			session.close();
 		}
 		
@@ -114,6 +116,8 @@ public class OrderOperate {
 		} catch (Exception e) {
 			e.printStackTrace();
 			flag = false;
+		} finally {
+			session.close();
 		}
 		
 		return flag;
@@ -122,9 +126,11 @@ public class OrderOperate {
 	/**
 	 * 检查订单是否被管理员接收到
 	 * @param uuid 订单的标识
+	 * @param managerId 管理员id，用来更新剩余车位数
+	 * @param bookNumber 预定的车位数
 	 * @return boolean
 	 */
-	public boolean checkOrderReceived(String uuid) {
+	public boolean checkOrderReceived(String uuid, int managerId, int bookNumber) {
 		boolean flag = false;
 		int state = 0;
 		try {
@@ -137,11 +143,16 @@ public class OrderOperate {
 			}
 			if(state == 1) {
 				flag = true;
+				String hqlUpdate = "update ParkingBook set parkNum = parkNum-? where managerId=?";
+				Query query = session.createQuery(hqlUpdate).setParameter(0, bookNumber).setParameter(1, managerId);
+				query.executeUpdate();
 			} 
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			session.close();
 			flag = false;
+		} finally {
+			session.close();
 		}
 		
 		return flag;
@@ -161,6 +172,7 @@ public class OrderOperate {
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
 			session.close();
 		}
 		return count;

@@ -1,7 +1,9 @@
 package com.Lbs.model;
 
 import java.util.UUID;
-
+/**
+ * 订单
+ */
 public class Order {
 	private int orderId; // 订单Id
 	private String uuid; // 唯一标识

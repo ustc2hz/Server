@@ -1,5 +1,7 @@
 package com.Lbs.model;
-
+/**
+ * 驾驶员Model
+ */
 public class Driver {
 	private int driverId; // 驾驶员id
 	private String driverName; // 驾驶员名字

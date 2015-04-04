@@ -38,7 +38,6 @@ public class SendClientServlet extends HttpServlet {
 		String adminId = request.getParameter("adminId");
 		
 		String jacksonString = "old";
-		System.out.println("访问");
 		
 		OrderOperate op = new OrderOperate();
 		OrderShowList os = op.getAdminOrderShow(Integer.parseInt(adminId));

@@ -25,5 +25,6 @@
        	<mapping resource="com/Lbs/model/Admin.hbm.xml"/>
        	<mapping resource="com/Lbs/model/Driver.hbm.xml"/>
        	<mapping resource="com/Lbs/model/Order.hbm.xml"/>
+       	<mapping resource="com/Lbs/model/ParkingBook.hbm.xml"/>
 	</session-factory>	
 </hibernate-configuration>

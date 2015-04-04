@@ -37,6 +37,7 @@ public class DriverOrderServlet extends HttpServlet {
 		// 获取订单操作模式和驾驶员id
 		int handleType = Integer.valueOf(request.getParameter("type"));
 		int driverId = Integer.valueOf(request.getParameter("driverId"));
+		System.out.println("-->>id"+driverId);
 		
 		PrintWriter out = response.getWriter();
 		DriverOperate driverOperate = new DriverOperate();

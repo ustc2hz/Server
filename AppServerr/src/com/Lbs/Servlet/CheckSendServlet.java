@@ -28,16 +28,19 @@ public class CheckSendServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		String orderUUID = request.getParameter("uuid");
+		int managerId = Integer.parseInt(request.getParameter("managerId"));
+		int bookNumber = Integer.parseInt(request.getParameter("bookNum"));
 		String result = "error";
 		OrderOperate op = new OrderOperate();
 		PrintWriter out = response.getWriter();
 		
-		if(op.checkOrderReceived(orderUUID)) {
+		if(op.checkOrderReceived(orderUUID,managerId,bookNumber)) {
 			result = "success";
 		} else {
 			// 删除数据库中的记录
 			op.deleteUnreceivedOrder(orderUUID);
 		}
+		
 		out.print(result);
 		out.flush();
 		out.close();

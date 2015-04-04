@@ -33,8 +33,6 @@ public class AdminLoginServlet extends HttpServlet {
 		Admin user = new Admin();
 		user.setAdminName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		user.setAdminPassword(request.getParameter("password"));
-		System.out.println("管理员名字：" + user.getAdminName());
-		System.out.println("管理员密码：" + user.getAdminPassword());
 		
 		Admin existUser = new AdminOperate().findAdmin(user);
 		
@@ -44,7 +42,6 @@ public class AdminLoginServlet extends HttpServlet {
 			list.add(String.valueOf(existUser.getAdminId()));
 			list.add(existUser.getAdminName());
 			list.add(existUser.getParkPhone());
-			System.out.println(list.toString());
 			ObjectMapper objectMapper = new ObjectMapper();
 			msg = objectMapper.writeValueAsString(list);
 		} 

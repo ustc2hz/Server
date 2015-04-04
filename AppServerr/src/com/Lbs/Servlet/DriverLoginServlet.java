@@ -34,8 +34,6 @@ public class DriverLoginServlet extends HttpServlet {
 		Driver driver = new Driver();
 		driver.setDriverName(new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8"));
 		driver.setDriverPassword(request.getParameter("password"));
-		System.out.println(driver.getDriverName());
-		System.out.println(driver.getDriverPassword());
 		
 		// 查找数据库
 		Driver existDriver = new DriverOperate().findDriver(driver);
@@ -46,7 +44,6 @@ public class DriverLoginServlet extends HttpServlet {
 			list.add(String.valueOf(existDriver.getDriverId()));
 			list.add(existDriver.getDriverName());
 			list.add(existDriver.getDriverPhone());
-			System.out.println(list.toString());
 			msg = objectMapper.writeValueAsString(list);
 		}
 		
