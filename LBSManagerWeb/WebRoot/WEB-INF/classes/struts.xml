@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="false" />
+	<!-- Admin processing -->
+    <package name="Admin" extends="struts-default" namespace="/admin">
+    	<global-results>
+    		<result>/error/500.jsp</result>
+    	</global-results>
+    	<action name="admin_*" class="cn.LBS.action.AdminAction" method="{1}">
+    		<!-- 登陆结果-->
+    		<result name="loginsuccess" type="redirect">/main.jsp</result>
+    		<result name="loginfail">/admin/login.jsp</result>
+    		<!-- 注册结果 -->
+    		<result name="registerfail">/admin/register.jsp</result>
+    		<result name="registersuccess" type="redirect">/admin/login.jsp</result>
+    		<!-- 修改密码结果 -->	
+    		<result name="success">/admin/UserInfo.jsp</result>
+    		<result name="fail">/admin/UserInfo.jsp</result>
+    		<!-- 删除管理员操作 -->
+    		<result name="deleteSuc" type="redirect">/admin/login.jsp</result>
+    		<result name="deleteFail">/admin/UserInfo.jsp</result>
+    	</action>
+    	<!--<action name="CheckImg" class="cn.LBS.view.CheckImgAction">
+    		<result name="SUCCESS">/admin/register.jsp</result>
+    	</action>  -->
+    </package>
+    <package name="Park" extends="struts-default" namespace="/park">
+    	<global-results>
+    		<result>/error/500.jsp</result>
+    	</global-results>
+    	<action name="ParkInfo_*" class="cn.LBS.action.ParkInfoAction" method="{1}">
+    		<!-- 停车场信息的修改 -->
+    		<result name="updatesuccess" type="chain">UpdateYuntuAction</result>
+    		<result name="updatefail">/park/ParkInfo.jsp</result>
+    		<!-- 停车场信息的创建 -->
+    		<result name="createsuccess" type="chain">DataToYuntuAction</result>
+    		<result name="createfail">/park/ParkInfo.jsp</result>
+    	</action>
+    	<action name="DataToYuntuAction" class="cn.LBS.action.DataToYuntuAction">
+    		<result name="sendsuccess" type="redirect">/main.jsp</result>
+    		<result name="sendfail">/park/ParkInfo.jsp</result>
+    	</action>
+    	<action name="UpdateYuntuAction" class="cn.LBS.action.UpdateYuntuAction">
+    		<result name="upsendsuccess" type="redirect">/main.jsp</result>
+    		<result name="upsendfail">/park/ParkInfo.jsp</result>
+    	</action>
+    </package>
+    <!-- Order processing-->
+    <package name="Order" extends="struts-default" namespace="/order">
+    <global-results>
+    		<result>/error/500.jsp</result>
+    	</global-results>
+    	<action name="Order_*" class="cn.LBS.action.OrderAction" method="{1}">
+    		<result name="success" type="redirect">/main.jsp</result>
+    		<!-- 修改订单状态：查看 失败 -->
+    		<result name="updfail">/order/OrderHandle.jsp</result>
+    		<!-- 修改订单状态：完成 失败
+    		<result name="uvfail">/order/OrderHandle.jsp</result> -->
+    		<!-- 删除订单失败 -->
+    		<result name="delfail">/order/OrderInfoo.jsp</result>
+    		<!-- 查询订单成功 -->
+    		<result name="countsuccess">/order/OrderCount.jsp</result>
+    	</action>
+    </package>
+</struts>

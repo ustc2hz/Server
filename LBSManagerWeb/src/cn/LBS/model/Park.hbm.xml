@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.LBS.model.Park" table="lbs_park" >
+		<id name="adminId" column="admin_id" type="integer">
+			<generator class="foreign">
+				<!-- property:指的是属性 -->
+				<param name="property">admin</param>
+			</generator>
+		</id>
+		<property name="parkPublic" column="park_public" type="string" not-null="false"></property>
+		<property name="parkRemain" column="park_remain" type="string" not-null="false"></property>
+		<!-- 与admin的admin_id为关联，既是主键，也是外键 -->
+		<one-to-one name="admin" class="cn.LBS.model.Admin" constrained="true"></one-to-one>
+	</class>
+</hibernate-mapping>

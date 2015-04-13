@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.LBS.model.Admin" table="lbs_admin" >
+		<id name="adminId" column="admin_id" type="integer">
+			<generator class="increment"></generator>	
+		</id>
+		<property name="adminName" column="admin_name" type="string" not-null="true" unique="true"></property>
+		<property name="adminPassword" column="admin_password" type="string" not-null="true"></property>
+		<property name="adminPhone" column="admin_phone" type="string" not-null="true" unique="true"></property>
+		<!-- 与parkinfo相关联，admin——id为外键 -->
+		<one-to-one name="parkInfo" class="cn.LBS.model.ParkInfo" cascade="all"></one-to-one>
+		<!-- 与park相关联 adminId 为主键关联 -->
+		<one-to-one name="park" class="cn.LBS.model.Park" cascade="all"></one-to-one>
+	</class>
+</hibernate-mapping>

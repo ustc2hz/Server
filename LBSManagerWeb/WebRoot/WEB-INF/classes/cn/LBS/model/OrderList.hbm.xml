@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.LBS.model.OrderList" table="lbs_order" >
+		<id name="orderId" column="order_id" type="integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="driverNum" column="driver_number" type="integer" not-null="true"></property>
+		<property name="parkName" column="park_name" type="string" not-null="true"></property>
+		<property name="parkAddress" column="park_address" type="string" not-null="true"></property>
+		<property name="orderDate" column="order_date" type="string" not-null="true"></property>
+		<property name="orderInfo" column="order_info" type="string" not-null="true"></property>
+		<property name="orderPrice" column="order_price" type="string" not-null="true"></property>
+		<property name="orderStatus" column="order_status" type="integer" not-null="true"></property>
+		<many-to-one name="admin" class="cn.LBS.model.Admin" column="admin_id" not-null="true" cascade="save-update" lazy="false">
+		</many-to-one>
+		<many-to-one name="driver" class="cn.LBS.model.Driver" column="driver_id" not-null="true" cascade="save-update" lazy="false"></many-to-one>
+	</class>
+</hibernate-mapping>

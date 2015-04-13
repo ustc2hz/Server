@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.LBS.model.ParkInfo" table="lbs_parkinfo" >
+		<id name="adminId" column="admin_id" type="integer">
+			<generator class="foreign">
+				<param name="property">admin</param>
+			</generator>	
+		</id>
+		<property name="adminPhone" column="admin_phone" type="string" not-null="false" unique="true"></property>
+		<property name="parkName" column="park_name" type="string" not-null="false"></property>
+		<property name="parkAddress" column="park_address" type="string" not-null="false"></property>
+		<property name="orderTen" column="park_ten" type="string" not-null="false"></property>
+		<property name="orderTri" column="park_tri" type="string" not-null="false"></property>
+		<property name="orderTwe" column="park_twe" type="string" not-null="false"></property>
+		<property name="payHalPay" column="park_halpay" type="string" not-null="false"></property>
+		<property name="payMorePay" column="park_morepay" type="string" not-null="false"></property>
+		<property name="payOneHour" column="park_onepay" type="string" not-null="false"></property>
+		<property name="parkSum" column="park_sum" type="string" not-null="false"></property>
+	 	<property name="parkId" column="park_id" type="integer" not-null="false"></property>
+	 	<!-- 与admin的park—phone 关联，既为主键，也是外键 -->
+		<one-to-one name="admin" class="cn.LBS.model.Admin"  constrained="true"></one-to-one>
+	</class>
+</hibernate-mapping>

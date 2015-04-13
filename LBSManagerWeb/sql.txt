@@ -1,0 +1,106 @@
+待解决问题：
+5.在Struts.xml中显示默认显示错误页面(防止页面出错)
+
+在可能出错的页面尽可能的显示错误信息，在Action中的this.addFieldError（）。
+3.实时刷新，2秒刷新一次
+
+
+用Sql语句查询时，不要忘了加上一句话addEntity(OrderList.class);
+页面刷新：
+二、自动刷新页面
+1.页面自动刷新：把如下代码加入<head>区域中
+<meta http-equiv="refresh" content="20">
+其中20指每隔20秒刷新一次页面.
+2.页面自动跳转：把如下代码加入<head>区域中
+<meta http-equiv="refresh" content="20;url=http://www.jb51.net">
+其中20指隔20秒后跳转到http://www.jb51.net页面
+3.页面自动刷新js版
+ 
+<script language="JavaScript">
+function myrefresh()
+{
+window.location.reload();
+}
+setTimeout('myrefresh()',1000); //指定1秒刷新一次
+</script>
+
+删除cookie的方式
+Cookie[] cookies=request.getCookies();
+ if(cookies!=null)   
+ {   
+     for(int   i=0;i<cookies.length;i++){
+     Cookie sp = cookies[i].getName();
+     if(sp.equals("spreadN"))   
+      {   
+          cookies[i].setMaxAge(0);   
+          response.addCookie(cookies[i]);   
+      }   
+      if(sp.equals("spread"))   
+      {   
+          cookies[i].setMaxAge(0);   
+          response.addCookie(cookies[i]);     
+      } 
+
+elect order0_.order_id as order_id1_2_0_, admin1_.admin_id as admin_id1_0_1_, order0_.driver_id as driver_i2_2_0_, order0_.driver_num as driver_n3_2_0_, order0_.park_name as park_nam4_2_0_, order0_.park_address as park_add5_2_0_, order0_.order_date as order_da6_2_0_, order0_.driver_phone as driver_p7_2_0_, order0_.order_info as order_in8_2_0_, order0_.order_price as order_pr9_2_0_, order0_.order_status as order_s10_2_0_, order0_.admin_id as admin_i11_2_0_, admin1_.admin_name as admin_na2_0_1_, admin1_.admin_password as admin_pa3_0_1_, admin1_.park_phone as park_pho4_0_1_ from order order0_ cross join admin admin1_ cross join admin admin2_ where order0_.admin_id=admin2_.admin_id and admin2_.admin_name=? and order0_.order_status=?
+
+setFirstResult(int firstResult): 设定从哪一个对象开始检索, 参数 firstResult 表示这个对象在查询结果中的索引位置, 索引位置的起始值为 0. 默认情况下, Query 从查询结果中的第一个对象开始检索
+setMaxResult(int maxResults): 设定一次最多检索出的对象的数目. 在默认情况下, Query 和 Criteria 接口检索出查询结果中所有的对象
+
+//hql查询
+Query query=session.createQuery("from Order o  order by o.id asc");
+query.setFirstResult(3);
+query.setMaxResults(4);
+query.list();
+
+
+hql 查询：
+Query query = session.createQuery("from Customer c where " +
+                                  " c.name=:custname and c.age=:custage");
+//第一个参数代表名字，第二个参数代表值
+query.setString("custname", "Tom");
+query.setInteger("custage", 21);
+List list = query.list();
+
+
+left outer join o.admin a where o.orderStatus = 0 and a.adminId = 1
+
+jdbc中的sql语句的位置绑定参数从1开始
+hql语句的位置绑定参数从0开始
+
+
+// 判断输入是否是一个整数
+function isint(str)
+{
+var result=str.match(/^(-|\+)?\d+$/);
+if(result==null) return false;
+return true;
+}
+
+控制只能输入数字
+onkeypress="return (/[\d.]/.test(String.fromCharCode(event.keyCode)))"
+
+
+031185907468或02185907468格式
+function isphone1(){
+     var num = document.getElementById('ph').value;
+     var partten = /^0(([1-9]d)|([3-9]d{2}))d{8}$/;
+     if(partten.test(num)){
+      alert('是电话号码');
+     }else{
+      alert('不是电话号码');
+     }
+    }
+    function isphone2(){
+     var num = document.getElementById('mb').value;
+     var partten = /^1[3,5]d{9}$/;
+     if(partten.test(num)){
+      alert('是手机号码');
+     }else{
+      alert('不是手机号码');
+     }
+    }
+    
+    parkinfo.hbm.xml
+    
+    <!-- 与admin的park—phone 关联，既为主键，也是外键 -->
+		<one-to-one name="admin" class="cn.LBS.model.Admin" property-ref="parkInfo" constrained="true" cascade="save-update" lazy="false"></one-to-one>
