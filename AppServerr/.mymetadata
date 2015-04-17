@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="AppServerr"
+  name="AppServer"
   id="myeclipse.1422765167703"
   context-root="/AppServerr"
   j2ee-spec="5.0"
-  archive="AppServerr.war">
+  archive="AppServer.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

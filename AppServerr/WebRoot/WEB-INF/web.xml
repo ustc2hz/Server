@@ -1,77 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name></display-name>
   <servlet>
     <servlet-name>AdminLoginServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.AdminLoginServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.AdminLoginServlet</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>AdminOrderServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.AdminOrderServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.AdminOrderServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>AdminRegisterServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.AdminRegisterServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.AdminRegisterServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>CheckSendServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.CheckSendServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.CheckSendServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>DriverLoginServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.DriverLoginServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.DriverLoginServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>DriverOrderServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.DriverOrderServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.DriverOrderServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>DriverRegisterServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.DriverRegisterServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.DriverRegisterServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>SendClientServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.SendClientServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.SendClientServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>ServerToYuntu</servlet-name>
-    <servlet-class>com.Lbs.Servlet.ServerToYuntu</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.ServerToYuntu</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>AdminUpdateServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.AdminUpdateServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.AdminUpdateServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>DriverUpdateServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.DriverUpdateServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.DriverUpdateServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>SolveOrderServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.SolveOrderServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.SolveOrderServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>ChangeOrderStatus</servlet-name>
-    <servlet-class>com.Lbs.Servlet.ChangeOrderStatus</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.ChangeOrderStatus</servlet-class>
   </servlet>
-	<servlet>
-		<servlet-name>ServerUpdateYuntu</servlet-name>
-   		<servlet-class>com.Lbs.Servlet.ServerUpdateYuntu</servlet-class>
-	</servlet>
+  <servlet>
+    <servlet-name>ServerUpdateYuntu</servlet-name>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.ServerUpdateYuntu</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>OrderStatusToTwoServlet</servlet-name>
-    <servlet-class>com.Lbs.Servlet.OrderStatusToTwoServlet</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.OrderStatusToTwoServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>GetParkingCurrentNumber</servlet-name>
-    <servlet-class>com.Lbs.Servlet.GetParkingCurrentNumber</servlet-class>
+    <servlet-class>ustc.sse.water.lbs.server.servlets.GetParkingCurrentNumber</servlet-class>
   </servlet>
-
-
-
   <servlet-mapping>
     <servlet-name>AdminLoginServlet</servlet-name>
     <url-pattern>/AdminLoginServlet</url-pattern>
@@ -123,7 +116,7 @@
   <servlet-mapping>
     <servlet-name>ChangeOrderStatus</servlet-name>
     <url-pattern>/ChangeOrderStatus</url-pattern>
-  </servlet-mapping>	
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ServerUpdateYuntu</servlet-name>
     <url-pattern>/ServerUpdateYuntu</url-pattern>
@@ -136,7 +129,6 @@
     <servlet-name>GetParkingCurrentNumber</servlet-name>
     <url-pattern>/GetParkingCurrentNumber</url-pattern>
   </servlet-mapping>
-  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

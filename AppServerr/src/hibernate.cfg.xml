@@ -4,11 +4,13 @@
 	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
+	
 		<!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/lbs_server</property>
         <property name="connection.username">zjx</property>
         <property name="connection.password">130013</property>
+        
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">3</property>
         <!-- SQL dialect -->
@@ -21,10 +23,12 @@
         <property name="show_sql">true</property>
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
+        
         <!-- 资源映射 -->
        	<mapping resource="com/Lbs/model/Admin.hbm.xml"/>
        	<mapping resource="com/Lbs/model/Driver.hbm.xml"/>
        	<mapping resource="com/Lbs/model/Order.hbm.xml"/>
-       	<mapping resource="com/Lbs/model/ParkingBook.hbm.xml"/>
+       	<mapping resource="com/Lbs/model/Park.hbm.xml"/>
+       	
 	</session-factory>	
 </hibernate-configuration>
